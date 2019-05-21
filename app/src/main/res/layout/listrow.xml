@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="50sp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/sub_name"
+        android:layout_height="wrap_content"
+        android:text="Subject Name: "
+        android:textColor="#000"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/prerequi"
+        android:layout_height="wrap_content"
+        android:text="Pre-Requisite: "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/venue"
+        android:layout_height="wrap_content"
+        android:text="Venue: "/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/currency"
+            android:text="Currency:"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teacher's Name: "
+            android:id="@+id/tname"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teacher's Department: "
+            android:id="@+id/tdept"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teacher's Contact: "
+            android:id="@+id/tcontact"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Timing"
+            android:id="@+id/time"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teacher's Gender: "
+            android:id="@+id/tgen"/>
+
+    </LinearLayout>
+</LinearLayout>
