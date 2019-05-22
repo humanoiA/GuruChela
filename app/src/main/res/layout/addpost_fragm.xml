@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BlankFragment2"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="57dp"
+        android:text="* marked fields are required"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:layout_marginBottom="330dp"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginTop="100dp"
+        android:hint="Subject*"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginBottom="330dp"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="57dp"
+        android:hint="Pre-Requisite*"
+        android:layout_marginTop="150dp"
+        android:textSize="15dp"
+        android:layout_marginBottom="330dp"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginTop="200dp"
+        android:hint="Venue*"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginBottom="330dp"/>
+    <TimePicker
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginTop="275dp"
+        android:id="@+id/time"
+        android:scaleX="0.90"
+        android:scaleY="0.90"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginBottom="330dp"/>
+    <DatePicker
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleX="0.90"
+        android:scaleY="0.90"
+        android:layout_marginLeft="57dp"
+        android:layout_marginTop="600dp"
+        android:id="@+id/date"
+        android:inputType="textPassword"
+        android:layout_marginBottom="330dp"/>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="120dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="920dp"
+        android:layout_marginLeft="150dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_selector"
+        android:text="REGISTER"
+        />
+</FrameLayout>
+</ScrollView>

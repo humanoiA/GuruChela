@@ -2,7 +2,9 @@ package com.example.guru_chela;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -50,8 +52,79 @@ public class StudentView extends AppCompatActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_view);
+        Toolbar toolbar = findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("GuruChela");
+        changeToolbarFont(toolbar,this);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        }
+        navigationView.getMenu().getItem(0).setChecked(false);
         downloadJSON("https://guruchela.herokuapp.com");
+
     }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.link:
+                // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_comtainer, new bookings()).commit();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://smudfe.co.in"));
+                startActivity(browserIntent);
+                break;
+            case R.id.home:
+                finish();
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.toolbar_menu,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.exit:
+            //    android.os.Process.killProcess(android.os.Process.myPid());
+               // android.os.Process.sendSignal(android.os.Process.myPid(), android.os.Process.SIGNAL_KILL);
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                finish();
+                System.exit(0);
+                break;
+                //return false;
+            case R.id.notify:
+                Toast.makeText(this, "No Notifications", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
@@ -201,26 +274,5 @@ public class StudentView extends AppCompatActivity implements NavigationView.OnN
     public static void applyFont(TextView tv, Activity context) {
         tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Sofia-Regular.ttf"));
     }
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
-    @Override
-    public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.toolbar_menu,menu);
-        return true;
-    }
 }

@@ -5,23 +5,15 @@
     android:title="Notification"
     app:showAsAction="always"
     android:icon="@drawable/notify"
+    android:id="@+id/notify"
     android:orderInCategory="100"/>
     <item android:title="Search"
         app:showAsAction="ifRoom|collapseActionView"
         android:icon="@drawable/search"
         android:orderInCategory="100"
         app:actionViewClass="android.support.v7.widget.SearchView" />
-    <item android:title="Some Action"
-        app:showAsAction="never"
-        android:orderInCategory="100"/>
-    <item android:title="Another Action"
-        app:showAsAction="never"
-        android:orderInCategory="100"/>
-    <item android:title="Disabled Action"
-        android:enabled="false"
-        app:showAsAction="never"
-        android:orderInCategory="100"/>
-    <item android:title="Yet Another Action"
+    <item android:title="Exit"
+        android:id="@+id/exit"
         app:showAsAction="never"
         android:orderInCategory="100"/>
 </menu>

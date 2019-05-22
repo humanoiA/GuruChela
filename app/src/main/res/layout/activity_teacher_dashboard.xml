@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".TeacherDashboard"
     tools:openDrawer="start">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             <include
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                layout="@layout/login_fragment"
+                layout="@layout/teacherdashboard_fragment"
                 />
         </FrameLayout>
 
