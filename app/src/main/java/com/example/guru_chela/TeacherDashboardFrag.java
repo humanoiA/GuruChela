@@ -53,7 +53,9 @@ public class TeacherDashboardFrag extends Fragment {
         ButterKnife.bind(this,v);
        // BlankFragment.getInstance();
         Toast.makeText(getContext(), getContext().getSharedPreferences(BlankFragment.MyPREFERENCES,Context.MODE_PRIVATE).getString("EMAIL",""),Toast.LENGTH_LONG).show();
-        downloadJSON("https://guruchela.herokuapp.com/"+getContext().getSharedPreferences(BlankFragment.MyPREFERENCES,Context.MODE_PRIVATE).getString("EMAIL",""));
+    //   Log.d("oo","https://guruchela.herokuapp.com/"+getContext().getSharedPreferences(BlankFragment.MyPREFERENCES,Context.MODE_PRIVATE).getString("EMAIL",""))
+;
+        downloadJSON("https://guruchela.herokuapp.com/api/"+getContext().getSharedPreferences(BlankFragment.MyPREFERENCES,Context.MODE_PRIVATE).getString("EMAIL",""));
         // Inflate the layout for this fragment
         return v;
     }
@@ -123,7 +125,8 @@ public class TeacherDashboardFrag extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                // Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                Log.d("ERRR",s);
+                 Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                 try {
                     loadIntoListView(s);
                     Log.d("post", "onPostExecute: invokedPost");

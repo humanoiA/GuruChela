@@ -69,7 +69,7 @@ public class StudentView extends AppCompatActivity implements NavigationView.OnN
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         }
         navigationView.getMenu().getItem(0).setChecked(false);
-        downloadJSON("https://guruchela.herokuapp.com");
+        downloadJSON("https://guruchela.herokuapp.com/api/all");
 
     }
     @Override
