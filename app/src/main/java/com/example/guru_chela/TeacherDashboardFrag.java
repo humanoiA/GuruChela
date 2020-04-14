@@ -2,20 +2,19 @@ package com.example.guru_chela;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,9 +37,11 @@ import butterknife.ButterKnife;
  */
 public class TeacherDashboardFrag extends Fragment {
     SharedPreferences sharedPref;
+    SwipeRefreshLayout mSwipeRefreshLayout;
     SharedPreferences.Editor edit;
-    public static final String MyPREF = "Uname" ;
+    public static final String MyPREF = "Uid";
     ListView listView;
+    boolean flag = true;
     public TeacherDashboardFrag() {
         // Required empty public constructor
     }
@@ -49,13 +51,38 @@ public class TeacherDashboardFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.teacherdashboardposts, container, false);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeToRefresh);
         listView =  v.findViewById(R.id.listView);
         ButterKnife.bind(this,v);
        // BlankFragment.getInstance();
         Toast.makeText(getContext(), getContext().getSharedPreferences(BlankFragment.MyPREFERENCES,Context.MODE_PRIVATE).getString("EMAIL",""),Toast.LENGTH_LONG).show();
     //   Log.d("oo","https://guruchela.herokuapp.com/"+getContext().getSharedPreferences(BlankFragment.MyPREFERENCES,Context.MODE_PRIVATE).getString("EMAIL",""))
 ;
-        downloadJSON("https://guruchela.herokuapp.com/api/"+getContext().getSharedPreferences(BlankFragment.MyPREFERENCES,Context.MODE_PRIVATE).getString("EMAIL",""));
+        try {
+            String s = getJSONObjectFromURL("https://guruchela.herokuapp.com/api/search/" + getContext().getSharedPreferences(BlankFragment.MyPREFERENCES, Context.MODE_PRIVATE).getString("EMAIL", "IDK"));
+            if (s.indexOf('1') == -1) {
+                Toast.makeText(getContext(), "USER DOES NOT EXIST", Toast.LENGTH_LONG).show();
+                flag = false;
+            }
+        } catch (Exception e) {
+            Log.d("try", String.valueOf(e));
+        }
+        if (flag) {
+            downloadJSON("https://guruchela.herokuapp.com/api/" + getContext().getSharedPreferences(BlankFragment.MyPREFERENCES, Context.MODE_PRIVATE).getString("EMAIL", ""));
+        } else {
+            getActivity().finish();
+        }
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 2500);
+            }
+        });
         // Inflate the layout for this fragment
         return v;
     }
@@ -112,6 +139,30 @@ public class TeacherDashboardFrag extends Fragment {
         }
     }
 
+    public static String getJSONObjectFromURL(String urlString) throws IOException, JSONException {
+        HttpURLConnection urlConnection = null;
+        URL url = new URL(urlString);
+        urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("GET");
+        urlConnection.setReadTimeout(10000 /* milliseconds */);
+        urlConnection.setConnectTimeout(15000 /* milliseconds */);
+        urlConnection.setDoOutput(true);
+        urlConnection.connect();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line + "\n");
+        }
+        br.close();
+
+        String jsonString = sb.toString();
+        System.out.println("JSON: " + jsonString);
+
+        return jsonString;
+    }
     private void downloadJSON(final String urlWebService) {
 
         class DownloadJSON extends AsyncTask<Void, Void, String> {
@@ -164,6 +215,7 @@ public class TeacherDashboardFrag extends Fragment {
             stocks[i] = Jarray.getString(i);
         }
         String fin[][]=new String[9][Jarray.length()];
+        String Uid = "";
         for (int i = 0; i < Jarray.length(); i++) {
             // JSONObject obj = jsonArray.getJSONObject(0);
             //stocks[i] = Jarray.getString(i);
@@ -177,16 +229,17 @@ public class TeacherDashboardFrag extends Fragment {
             fin[6][i]=o[10].replace("\"","");
             fin[7][i]=o[12].replace("\"","");
             fin[8][i]=o[13].replace("\"","").replace("]","");
+            Uid = o[14].replace("\"", "").replace("]", "");
             //fin[i][5]=o[5];
 
         }
         //  Log.d("----", "loadIntoListView: invoked");
         //  ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fin[1]);
         MyAdapter adap=new MyAdapter(getContext(),fin[0],fin[1],fin[2],fin[3],fin[4],fin[5],fin[6],fin[7],fin[8]);
-       // sharedPref=getContext().getSharedPreferences(MyPREF, Context.MODE_PRIVATE);
-     //   edit=sharedPref.edit();
-     //   edit.putString("UserName",fin[5][0]);
-     //   edit.apply();
+        sharedPref = getContext().getSharedPreferences(MyPREF, Context.MODE_PRIVATE);
+        edit = sharedPref.edit();
+        edit.putString("UserId", Uid);
+        edit.apply();
         final String name= fin[5][0];
         final TextView loadText = getActivity().findViewById(R.id.UserName);
         getActivity().runOnUiThread(new Runnable() {
@@ -195,6 +248,7 @@ public class TeacherDashboardFrag extends Fragment {
                 loadText.setText("Welcome, "+name);
             }
         });
+
         listView.setAdapter(adap);
     }
 

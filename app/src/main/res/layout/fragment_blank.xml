@@ -5,48 +5,50 @@
     android:layout_height="match_parent"
     tools:context=".BlankFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <EditText
-        android:id="@+id/teachermail"
-        android:layout_width="246dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColorHighlight="@color/colorPrimary"
-        android:layout_marginLeft="80dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- TODO: Update blank fragment layout -->
+        <EditText
+            android:id="@+id/teachermail"
+            android:layout_width="246dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="100dp"
+            android:ems="10"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColorHighlight="@color/colorPrimary"
+            android:layout_marginLeft="80dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/teacherpass"
-        android:layout_width="246dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="150dp"
-        android:hint="Password"
-        android:backgroundTint="@color/colorPrimary"
-        android:layout_marginLeft="80dp"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/teacherpass"
+            android:layout_width="246dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="150dp"
+            android:hint="Password"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginLeft="80dp"
+            android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/buttonTeacherlogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="150dp"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/button_selector"
-        android:text="LOGIN"
-         />
+        <Button
+            android:id="@+id/buttonTeacherlogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="150dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_selector"
+            android:text="LOGIN" />
 
-    <Button
-        android:id="@+id/buttonStudent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="115dp"
-        android:layout_marginTop="280dp"
-        android:background="@drawable/button_selector"
-        android:text="LOGIN AS STUDENT"
-        android:textColor="#FFFFFF" />
-
+        <Button
+            android:id="@+id/buttonStudent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="115dp"
+            android:layout_marginTop="280dp"
+            android:background="@drawable/button_selector"
+            android:text="LOGIN AS STUDENT"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
 </FrameLayout>
