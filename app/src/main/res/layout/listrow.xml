@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/currency"
-            android:text="Currency:"/>
+            android:text="Currency(in ₹):" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -128,7 +128,7 @@ public class TeacherDashboardFrag extends Fragment {
             TextView tgen=row.findViewById(R.id.tgen);
             subname.setText("Subject: "+SubName[position]);
             prereq.setText("Pre-Requisite: "+Prerequi[position]);
-            venue.setText("Currency: "+Currency[position]);
+            venue.setText("Charge Amount(in ₹): " + Currency[position]);
             curren.setText("Venue: "+venuee[position]);
             time.setText("Time: "+timee[position]);
             tname.setText("Teacher's Name: "+tnamee[position]);

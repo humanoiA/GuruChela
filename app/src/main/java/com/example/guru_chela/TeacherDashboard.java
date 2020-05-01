@@ -51,7 +51,7 @@ public class TeacherDashboard extends AppCompatActivity implements NavigationVie
         tabreg=findViewById(R.id.reg);
         Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("GuruChela");
+        getSupportActionBar().setTitle("Tutor's Hub");
         changeToolbarFont(toolbar,this);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         drawer = findViewById(R.id.drawer_layout);
